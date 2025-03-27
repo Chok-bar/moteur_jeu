@@ -13,7 +13,7 @@ class Role(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
 Wolf: Role
 Villager: Role
 
-class GammeListRequest(_message.Message):
+class GameListRequest(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 

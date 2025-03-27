@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 service GameServer {
-  rpc GameList (GammeListRequest) returns (GameListReply) {}
+  rpc GameList (GameListRequest) returns (GameListReply) {}
   rpc GameSubscribe (GameSubscribeRequest) returns (GameSubscribeReply) {}
   rpc GetGameStatus (GetGameStatusRequest) returns (GetGameStatusReply) {}
   rpc GetGameboardStatus (GetGameboardStatusRequest) returns (GetGameboardStatusReply) {}
@@ -13,7 +13,7 @@ enum Role {
   Villager = 1;
 }
 
-message GammeListRequest {}
+message GameListRequest {}
 
 message GameListReply {
   bool status = 1;

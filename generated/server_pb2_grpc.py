@@ -36,7 +36,7 @@ class GameServerStub(object):
         """
         self.GameList = channel.unary_unary(
                 '/GameServer/GameList',
-                request_serializer=server__pb2.GammeListRequest.SerializeToString,
+                request_serializer=server__pb2.GameListRequest.SerializeToString,
                 response_deserializer=server__pb2.GameListReply.FromString,
                 _registered_method=True)
         self.GameSubscribe = channel.unary_unary(
@@ -99,7 +99,7 @@ def add_GameServerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GameList': grpc.unary_unary_rpc_method_handler(
                     servicer.GameList,
-                    request_deserializer=server__pb2.GammeListRequest.FromString,
+                    request_deserializer=server__pb2.GameListRequest.FromString,
                     response_serializer=server__pb2.GameListReply.SerializeToString,
             ),
             'GameSubscribe': grpc.unary_unary_rpc_method_handler(
@@ -148,7 +148,7 @@ class GameServer(object):
             request,
             target,
             '/GameServer/GameList',
-            server__pb2.GammeListRequest.SerializeToString,
+            server__pb2.GameListRequest.SerializeToString,
             server__pb2.GameListReply.FromString,
             options,
             channel_credentials,
