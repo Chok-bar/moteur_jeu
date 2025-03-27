@@ -134,6 +134,9 @@ class GameState:
         except ValueError:
             return False, None
         
+        def louis_walter():
+            pass
+        
         curr_row, curr_col = player["position"]
         new_row = curr_row + delta_row
         new_col = curr_col
