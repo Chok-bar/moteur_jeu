@@ -6,12 +6,26 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class Role(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+class PlayerRole(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
-    Wolf: _ClassVar[Role]
-    Villager: _ClassVar[Role]
-Wolf: Role
-Villager: Role
+    Villager: _ClassVar[PlayerRole]
+    Wolf: _ClassVar[PlayerRole]
+Villager: PlayerRole
+Wolf: PlayerRole
+
+class Position(_message.Message):
+    __slots__ = ("row", "col")
+    ROW_FIELD_NUMBER: _ClassVar[int]
+    COL_FIELD_NUMBER: _ClassVar[int]
+    row: int
+    col: int
+    def __init__(self, row: _Optional[int] = ..., col: _Optional[int] = ...) -> None: ...
+
+class Move(_message.Message):
+    __slots__ = ("next_position",)
+    NEXT_POSITION_FIELD_NUMBER: _ClassVar[int]
+    next_position: Position
+    def __init__(self, next_position: _Optional[_Union[Position, _Mapping]] = ...) -> None: ...
 
 class GameListRequest(_message.Message):
     __slots__ = ()
@@ -39,19 +53,20 @@ class GameSubscribeReply(_message.Message):
     ROLE_FIELD_NUMBER: _ClassVar[int]
     ID_PLAYER_FIELD_NUMBER: _ClassVar[int]
     status: bool
-    role: Role
+    role: PlayerRole
     id_player: int
-    def __init__(self, status: bool = ..., role: _Optional[_Union[Role, str]] = ..., id_player: _Optional[int] = ...) -> None: ...
+    def __init__(self, status: bool = ..., role: _Optional[_Union[PlayerRole, str]] = ..., id_player: _Optional[int] = ...) -> None: ...
 
 class GetGameStatusRequest(_message.Message):
-    __slots__ = ("id_player", "id_game")
-    ID_PLAYER_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("id_game", "id_player")
     ID_GAME_FIELD_NUMBER: _ClassVar[int]
-    id_player: int
+    ID_PLAYER_FIELD_NUMBER: _ClassVar[int]
     id_game: int
-    def __init__(self, id_player: _Optional[int] = ..., id_game: _Optional[int] = ...) -> None: ...
+    id_player: int
+    def __init__(self, id_game: _Optional[int] = ..., id_player: _Optional[int] = ...) -> None: ...
 
 class GetGameStatusReply(_message.Message):
+<<<<<<< HEAD
     __slots__ = ("status", "party")
     STATUS_FIELD_NUMBER: _ClassVar[int]
     PARTY_FIELD_NUMBER: _ClassVar[int]
@@ -86,6 +101,20 @@ class Position(_message.Message):
     row: int
     col: int
     def __init__(self, row: _Optional[int] = ..., col: _Optional[int] = ...) -> None: ...
+=======
+    __slots__ = ("status", "started", "round_in_progress", "winner", "alive")
+    STATUS_FIELD_NUMBER: _ClassVar[int]
+    STARTED_FIELD_NUMBER: _ClassVar[int]
+    ROUND_IN_PROGRESS_FIELD_NUMBER: _ClassVar[int]
+    WINNER_FIELD_NUMBER: _ClassVar[int]
+    ALIVE_FIELD_NUMBER: _ClassVar[int]
+    status: bool
+    started: bool
+    round_in_progress: int
+    winner: str
+    alive: bool
+    def __init__(self, status: bool = ..., started: bool = ..., round_in_progress: _Optional[int] = ..., winner: _Optional[str] = ..., alive: bool = ...) -> None: ...
+>>>>>>> 0a61db9 (Implémentation du moteur de jeu V1)
 
 class GetGameboardStatusRequest(_message.Message):
     __slots__ = ("id_party", "id_player")
@@ -122,3 +151,17 @@ class MoveResponse(_message.Message):
     round_in_progress: int
     move: Move
     def __init__(self, status: bool = ..., round_in_progress: _Optional[int] = ..., move: _Optional[_Union[Move, _Mapping]] = ...) -> None: ...
+
+class CreateGameRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class CreateGameResponse(_message.Message):
+    __slots__ = ("game_id", "success", "error_message")
+    GAME_ID_FIELD_NUMBER: _ClassVar[int]
+    SUCCESS_FIELD_NUMBER: _ClassVar[int]
+    ERROR_MESSAGE_FIELD_NUMBER: _ClassVar[int]
+    game_id: str
+    success: bool
+    error_message: str
+    def __init__(self, game_id: _Optional[str] = ..., success: bool = ..., error_message: _Optional[str] = ...) -> None: ...

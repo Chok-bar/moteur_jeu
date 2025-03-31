@@ -59,6 +59,11 @@ class GameServerStub(object):
                 request_serializer=server__pb2.MoveRequest.SerializeToString,
                 response_deserializer=server__pb2.MoveResponse.FromString,
                 _registered_method=True)
+        self.CreateGame = channel.unary_unary(
+                '/GameServer/CreateGame',
+                request_serializer=server__pb2.CreateGameRequest.SerializeToString,
+                response_deserializer=server__pb2.CreateGameResponse.FromString,
+                _registered_method=True)
 
 
 class GameServerServicer(object):
@@ -94,6 +99,12 @@ class GameServerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateGame(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_GameServerServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -121,6 +132,11 @@ def add_GameServerServicer_to_server(servicer, server):
                     servicer.Move,
                     request_deserializer=server__pb2.MoveRequest.FromString,
                     response_serializer=server__pb2.MoveResponse.SerializeToString,
+            ),
+            'CreateGame': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateGame,
+                    request_deserializer=server__pb2.CreateGameRequest.FromString,
+                    response_serializer=server__pb2.CreateGameResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -258,6 +274,33 @@ class GameServer(object):
             '/GameServer/Move',
             server__pb2.MoveRequest.SerializeToString,
             server__pb2.MoveResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CreateGame(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/GameServer/CreateGame',
+            server__pb2.CreateGameRequest.SerializeToString,
+            server__pb2.CreateGameResponse.FromString,
             options,
             channel_credentials,
             insecure,

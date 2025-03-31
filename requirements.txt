@@ -1,2 +1,5 @@
-grpcio
-grpcio-tools
+grpcio>=1.50.0
+grpcio-tools>=1.50.0
+psycopg2-binary>=2.9.5
+protobuf>=4.21.9
+sqlalchemy>=2.0.23
