@@ -9,8 +9,8 @@ from typing import Dict, List, Tuple, Optional, Any, Set
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/generated")
 
-import generated.server_pb2 as server_pb2
-import generated.server_pb2_grpc as server_pb2_grpc
+import server_pb2
+import server_pb2_grpc
 
 
 logging.basicConfig(level=logging.INFO)
