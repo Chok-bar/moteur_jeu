@@ -38,7 +38,7 @@ message GetGameStatusRequest {
 
 message GetGameStatusReply {
   bool status = 1;
-  
+  Game party = 2;
 }
 
 message Game {
@@ -46,7 +46,7 @@ message Game {
   int32 id_player = 2;
   bool started = 3;
   int32 round_in_progress = 4;
-
+  Move move = 5;
 }
 
 message Move {

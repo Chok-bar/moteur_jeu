@@ -52,22 +52,26 @@ class GetGameStatusRequest(_message.Message):
     def __init__(self, id_player: _Optional[int] = ..., id_game: _Optional[int] = ...) -> None: ...
 
 class GetGameStatusReply(_message.Message):
-    __slots__ = ("status",)
+    __slots__ = ("status", "party")
     STATUS_FIELD_NUMBER: _ClassVar[int]
+    PARTY_FIELD_NUMBER: _ClassVar[int]
     status: bool
-    def __init__(self, status: bool = ...) -> None: ...
+    party: Game
+    def __init__(self, status: bool = ..., party: _Optional[_Union[Game, _Mapping]] = ...) -> None: ...
 
 class Game(_message.Message):
-    __slots__ = ("id_game", "id_player", "started", "round_in_progress")
+    __slots__ = ("id_game", "id_player", "started", "round_in_progress", "move")
     ID_GAME_FIELD_NUMBER: _ClassVar[int]
     ID_PLAYER_FIELD_NUMBER: _ClassVar[int]
     STARTED_FIELD_NUMBER: _ClassVar[int]
     ROUND_IN_PROGRESS_FIELD_NUMBER: _ClassVar[int]
+    MOVE_FIELD_NUMBER: _ClassVar[int]
     id_game: int
     id_player: int
     started: bool
     round_in_progress: int
-    def __init__(self, id_game: _Optional[int] = ..., id_player: _Optional[int] = ..., started: bool = ..., round_in_progress: _Optional[int] = ...) -> None: ...
+    move: Move
+    def __init__(self, id_game: _Optional[int] = ..., id_player: _Optional[int] = ..., started: bool = ..., round_in_progress: _Optional[int] = ..., move: _Optional[_Union[Move, _Mapping]] = ...) -> None: ...
 
 class Move(_message.Message):
     __slots__ = ("next_position",)
