@@ -3,7 +3,6 @@
 import grpc
 import warnings
 
-
 import server_pb2 as server__pb2
 
 GRPC_GENERATED_VERSION = '1.71.0'
